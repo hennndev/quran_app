@@ -11,7 +11,10 @@ export const useFetch = (query) => {
 
             setData(data)
         }
-        fetchData()
+
+        if(!query.includes('null')) {
+            fetchData()
+        }
     }, [query])
 
     return {

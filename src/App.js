@@ -1,21 +1,26 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Sidebar from './components/UI/Sidebar'
-import Homepage from './pages/Homepage'
-import SurahDetail from './pages/SurahDetail'
+import React, { useState } from 'react'
+import Header from './components/UI/Header'
+import QuranList from './components/Quran/QuranList'
+import QuranAyahs from './components/Quran/QuranAyahs'
 
 const App = () => {
+
+	const [isSurah, setIsSurah] = useState(null)
+
+	const handleBack = () => {
+		setIsSurah(null)
+	}
 	return (
-		<Router>
-      		<div className="min-h-screen flex">
-				<Sidebar/>
-				<Switch>
-					<Route path="/" exact component={Homepage}/>
-					<Route path="/surah/:surahId" component={SurahDetail}/>
-				</Switch>
+		<main className="min-h-screen bg-gray-200">
+			<Header handleBack={handleBack}/>
+			<div className="px-6">
+				<div className="flex items-center justify-center lg:items-start lg:justify-start md:max-w-6xl mx-auto h-full mt-5 lg:space-x-10">
+					<QuranList setIsSurah={setIsSurah} isSurah={isSurah}/>
+					<QuranAyahs isSurah={isSurah}/>
+				</div>
 			</div>
-    	</Router>
-  	)
+		</main>
+	)
 }
 
 export default App
